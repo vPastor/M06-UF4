@@ -33,6 +33,12 @@
           v-model="currentItem.Cantidad"
         />
       </div>
+      <div class="form-group">
+        <label><strong>Novedad:</strong></label>
+        <input type="text" class="form-control" id="Cantidad"
+          v-model="currentItem.novedad"
+        />
+      </div>
     </form>
 
     <button class="badge badge-primary mr-2"
@@ -96,7 +102,8 @@ export default {
         title: this.currentItem.title,
         description: this.currentItem.description,
         Cantidad: this.currentItem.Cantidad - reduction,
-        image: this.currentItem.image
+        image: this.currentItem.image,
+        novedad: this.currentItem.novedad
       };
 
       ItemDataService.update(this.currentItem.id, data)

@@ -12,7 +12,9 @@ class ItemDataService {
   create(data) {
     return http.post("/items", data);
   }
-
+  createnovetat(data) {
+    return http.post("/items", data);
+  }
   update(id, data) {
     return http.put(`/items/${id}`, data);
   }
@@ -27,6 +29,9 @@ class ItemDataService {
 
   findByTitle(title) {
     return http.get(`/items?title=${title}`);
+  }
+  añadirCarrito(info){
+    return http.post('/cart',info);
   }
 }
 

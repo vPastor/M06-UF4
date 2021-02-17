@@ -8,9 +8,9 @@ export default new Router({
   routes: [
     {
       path: "/",
-      alias: "/tutorials",
-      name: "tutorials",
-      component: () => import("./components/TutorialsList")
+      alias: "/ItemsList",
+      name: "ItemsList",
+      component: () => import("./components/ItemsList")
     },
     {
       path: "/tutorials/:id",
@@ -43,6 +43,12 @@ export default new Router({
       name: "/market",
       alias:"/market",
       component: () => import("./components/ItemsMarketPlace")
+    },
+    {
+      path: "/novetats",
+      name: "/novetats",
+      alias:"/novetats",
+      component: () => import("./components/Novetats")
     }
   ]
 });

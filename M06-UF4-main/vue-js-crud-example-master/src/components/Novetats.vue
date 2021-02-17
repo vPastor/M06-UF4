@@ -6,7 +6,7 @@
           v-model="title"/>
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="button"
-            @click="searchTitle"
+            
           >
             Search
           </button>
@@ -14,17 +14,23 @@
       </div>
     </div>
     <div class="col-md-6">
-      <h4>Items Chart</h4>
-      <ul class="list-group">
-        <li class="list-group-item"
-          :class="{ active: index == currentIndex }"
-          v-for="(item, index) in items"
-          :key="index"
-          @click="setActiveItem(item, index)"
-        >
-          {{ item.title }}
-        </li>
-      </ul>
+      <h4>Novetats</h4>
+      <table class="list-group" v-for="(item, index) in items" :key="index" @click="setActiveItem(item, index)">
+        <th class="list-group-item" :class="{ active: index == currentIndex }" v-if="item.novedad == 1" > 
+       <p>
+            {{ item.title }}</p>
+            <img v-bind:src="item.image" />
+            <p>{{ item.price}}</p>
+            <button class="btn btn-outline-secondary" type="button" @click="comprar(item)"
+          >
+            Comprar
+          </button>
+            
+
+        
+          
+        </th>
+      </table>
 
       <button class="m-3 btn btn-sm btn-danger" @click="removeAllItems">
         Remove All
@@ -47,6 +53,9 @@
         </div>
          <div>
           <label><strong>Imagen:</strong></label> <img v-bind:src="currentItem.image" /> 
+        </div>
+        <div>
+          <label><strong>Novedad:</strong></label> {{ currentItem.novedad}}
         </div>
 
         <router-link :to="'/items/' + currentItem.id" class="badge badge-warning">Edit</router-link>
@@ -105,7 +114,18 @@ export default {
           console.log(e);
         });
     },
-    
+    comprar(item){
+      ItemDataService.añadirCarrito(item)
+      .then(response => {
+          this.items = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+
+    },
     searchTitle() {
       ItemDataService.findByTitle(this.title)
         .then(response => {
@@ -115,7 +135,7 @@ export default {
         .catch(e => {
           console.log(e);
         });
-    }
+    
   },
   mounted() {
     this.retrieveItems();
